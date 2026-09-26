@@ -8,9 +8,9 @@ namespace AutoCareApp.ApplicationLayer.Interface
     {
         void AddVehicle(Vehicle vehicle);
 
-        void UpdateVehicle(Guid vehicleId, Vehicle newVehicle);
+        void UpdateVehicle(string vehicleNumber, Vehicle newVehicle);
 
-        void DeleteVehicle(Guid vehicleId);
+        void DeleteVehicle(string vehicleNumber);
 
         IEnumerable<Vehicle> FetchAllVehicles();
     }

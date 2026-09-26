@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationLayer\Interface\IVehiclerepository.cs" />
+    <Compile Include="ApplicationLayer\Service\VehicleService.cs" />
     <Compile Include="Domain\Model\Vehicle.cs" />
     <Compile Include="InfrastructureLayer\FileHandlingService.cs" />
     <Compile Include="InfrastructureLayer\FilePath.Designer.cs">
@@ -91,7 +92,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ApplicationLayer\Service\" />
     <Folder Include="Domain\Enums\" />
     <Folder Include="PresentationLayer\Helper\" />
     <Folder Include="PresentationLayer\View\" />

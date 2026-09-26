@@ -20,12 +20,12 @@ namespace AutoCareApp.InfrastructureLayer
             }
         }
 
-        public void DeleteVehicle(Guid vehicleId)
+        public void DeleteVehicle(string vehicleNumber)
         {
             lock (_fileLock)
             {
                 var listOfVehicles = FileHandlingService.ReadFile<Vehicle>(FilePath.VehicleFile);
-                var vehicleToDelete = listOfVehicles.FirstOrDefault(x => x.VehicleId == vehicleId);
+                var vehicleToDelete = listOfVehicles.FirstOrDefault(x => x.VehicleNumber == vehicleNumber);
                 listOfVehicles.Remove(vehicleToDelete);
                 FileHandlingService.WriteFile(FilePath.VehicleFile, listOfVehicles);
             }
@@ -40,13 +40,12 @@ namespace AutoCareApp.InfrastructureLayer
             }
         }
 
-        public void UpdateVehicle(Guid vehicleId, Vehicle newVehicle)
+        public void UpdateVehicle(string vehicleNumber, Vehicle newVehicle)
         {
             lock (_fileLock)
             {
                 var listOfVehicles = FileHandlingService.ReadFile<Vehicle>(FilePath.VehicleFile);
-                var vehicleToUpdate = listOfVehicles.FirstOrDefault(x => x.VehicleId == vehicleId);
-                vehicleToUpdate.VehicleNumber = newVehicle.VehicleNumber;
+                var vehicleToUpdate = listOfVehicles.FirstOrDefault(x => x.VehicleNumber == vehicleNumber);
                 vehicleToUpdate.Model = newVehicle.Model;
                 vehicleToUpdate.Manufacturer = newVehicle.Manufacturer;
                 vehicleToUpdate.ManufacturedYear = newVehicle.ManufacturedYear;
