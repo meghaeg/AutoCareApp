@@ -18,6 +18,8 @@ namespace AutoCareApp.ApplicationLayer.Service
 
         private readonly Object _pendingServiceLock = new Object();
 
+        public event Action<Maintainance> OnCompleted;
+
         public MaintainanceService(IMaintainanceRepository maintainanceRepository, IVehiclerepository vehiclerepository)
         {
             this._maintainanceRepository = maintainanceRepository;
@@ -28,7 +30,7 @@ namespace AutoCareApp.ApplicationLayer.Service
         {
             lock (_pendingServiceLock)
             {
-                this._pendingServices = this._maintainanceRepository.FetchAllServices().Where(x => (x.ServiceCurrentStatus == ServiceStatus.Confirmed || x.ServiceCurrentStatus == ServiceStatus.InProgress) && (x.ServiceDate.Value.Date == DateTime.Now.Date)).ToList();
+                this._pendingServices = this._maintainanceRepository.FetchAllServices().Where(x => x.ServiceCurrentStatus == ServiceStatus.Confirmed || x.ServiceCurrentStatus == ServiceStatus.InProgress).ToList();
             }
         }
 
@@ -39,22 +41,32 @@ namespace AutoCareApp.ApplicationLayer.Service
                 List<Maintainance> services;
                 lock (this._pendingServiceLock)
                 {
-                    services = this._pendingServices;
+                    services = this._pendingServices.ToList();
                 }
 
-                TimeSpan currentTime = DateTime.Now.TimeOfDay;
+                DateTime now = DateTime.Now;
                 foreach (var serviceOrder in services)
                 {
-                    if (currentTime >= serviceOrder.ServiceEndTime)
+                    DateTime endTime = serviceOrder.ServiceDate.Value.Date + serviceOrder.ServiceEndTime.Value;
+                    DateTime startTime = serviceOrder.ServiceDate.Value.Date + serviceOrder.ServiceStartTime.Value;
+                    ServiceStatus oldStatus = serviceOrder.ServiceCurrentStatus;
+                    if (now >= endTime)
                     {
                         serviceOrder.ServiceCurrentStatus = ServiceStatus.Completed;
                     }
-                    else if (currentTime >= serviceOrder.ServiceStartTime)
+                    else if (now >= startTime)
                     {
                         serviceOrder.ServiceCurrentStatus = ServiceStatus.InProgress;
                     }
 
-                    this._maintainanceRepository.UpdateService(serviceOrder);
+                    if (oldStatus != serviceOrder.ServiceCurrentStatus)
+                    {
+                        this._maintainanceRepository.UpdateService(serviceOrder);
+                        if (serviceOrder.ServiceCurrentStatus == ServiceStatus.Completed)
+                        {
+                            OnCompleted?.Invoke(serviceOrder);
+                        }
+                    }
                 }
 
                 await Task.Delay(1000);

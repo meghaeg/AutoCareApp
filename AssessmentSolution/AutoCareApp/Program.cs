@@ -14,6 +14,12 @@ namespace AutoCareApp
             var vehicleRepository = new VehicleRepository();
             var maintainanceRepository = new MaintainanceRepository();
             var maintainanceService = new MaintainanceService(maintainanceRepository, vehicleRepository);
+            maintainanceService.OnCompleted += service =>
+            {
+                NotificationService.DisplayNotification(service);
+            };
+
+            maintainanceService.InitializePendingServices();
             var timer = new System.Timers.Timer();
             timer.Interval = 3000;
             timer.Elapsed += ((object sender, ElapsedEventArgs e) =>
