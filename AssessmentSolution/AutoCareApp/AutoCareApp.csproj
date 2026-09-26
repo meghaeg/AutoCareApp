@@ -82,6 +82,7 @@
     <Compile Include="Domain\Enums\ServiceStatus.cs" />
     <Compile Include="Domain\Enums\ServiceType.cs" />
     <Compile Include="Domain\Model\Maintainance.cs" />
+    <Compile Include="Domain\Model\Result.cs" />
     <Compile Include="Domain\Model\Vehicle.cs" />
     <Compile Include="InfrastructureLayer\FileHandlingService.cs" />
     <Compile Include="InfrastructureLayer\FilePath.Designer.cs">
@@ -98,6 +99,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DisplayResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\View\ServiceMaintainanceDashboard.cs" />
     <Compile Include="PresentationLayer\View\VehicleManagementView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

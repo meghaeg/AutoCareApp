@@ -15,5 +15,7 @@
         BatteryCheck,
 
         Other,
+
+        Invalid = 0,
     }
 }

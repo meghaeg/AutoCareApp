@@ -8,5 +8,7 @@ namespace AutoCareApp.ApplicationLayer.Interface
         void AddService(Maintainance service);
 
         IEnumerable<Maintainance> FetchAllServices();
+
+        void UpdateService(Maintainance serviceOrder);
     }
 }

@@ -9,11 +9,12 @@ namespace AutoCareApp.Domain.Model
         {
         }
 
-        public Maintainance(Guid serviceId, Guid vehicleId, ServiceType serviceType, DateTime serviceDate, TimeSpan startTime, TimeSpan endTime)
+        public Maintainance(Guid serviceId, string vehicleNumber, ServiceType serviceType, ServiceStatus serviceCurrentStatus, DateTime? serviceDate, TimeSpan? startTime, TimeSpan? endTime)
         {
             this.ServiceId = serviceId;
-            this.VehicleId = vehicleId;
+            this.VehicleNumber = vehicleNumber;
             this.ServiceTypeChosen = serviceType;
+            this.ServiceCurrentStatus = serviceCurrentStatus;
             this.ServiceDate = serviceDate;
             this.ServiceStartTime = startTime;
             this.ServiceEndTime = endTime;
@@ -21,14 +22,16 @@ namespace AutoCareApp.Domain.Model
 
         public Guid ServiceId { get; set; }
 
-        public Guid VehicleId { get; set; }
+        public string VehicleNumber { get; set; }
 
         public ServiceType ServiceTypeChosen { get; set; }
 
-        public DateTime ServiceDate { get; set; }
+        public ServiceStatus ServiceCurrentStatus { get; set; }
 
-        public TimeSpan ServiceStartTime { get; set; }
+        public DateTime? ServiceDate { get; set; }
 
-        public TimeSpan ServiceEndTime { get; set; }
+        public TimeSpan? ServiceStartTime { get; set; }
+
+        public TimeSpan? ServiceEndTime { get; set; }
     }
 }

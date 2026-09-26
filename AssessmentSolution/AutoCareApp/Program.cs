@@ -2,6 +2,7 @@
 using AutoCareApp.InfrastructureLayer;
 using AutoCareApp.PresentationLayer.View;
 using System;
+using System.Timers;
 
 namespace AutoCareApp
 {
@@ -11,9 +12,21 @@ namespace AutoCareApp
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
             var vehicleRepository = new VehicleRepository();
+            var maintainanceRepository = new MaintainanceRepository();
+            var maintainanceService = new MaintainanceService(maintainanceRepository, vehicleRepository);
+            var timer = new System.Timers.Timer();
+            timer.Interval = 3000;
+            timer.Elapsed += ((object sender, ElapsedEventArgs e) =>
+            {
+                maintainanceService.InitializePendingServices();
+            });
+
+            timer.Start();
+            _ = maintainanceService.DoService();
             var vehicleService = new VehicleService(vehicleRepository);
-            var consoleOperator = new ConsoleOperator(vehicleService);
+            var consoleOperator = new ConsoleOperator(vehicleService, maintainanceService);
             consoleOperator.Run();
+            timer.Stop();
         }
 
         private static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
