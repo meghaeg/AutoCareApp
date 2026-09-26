@@ -8,21 +8,21 @@ namespace AutoCareApp.InfrastructureLayer
     {
         private readonly object _fileLock = new object();
 
-        public void AddService(MaintainanceService service)
+        public void AddService(Maintainance service)
         {
             lock (_fileLock)
             {
-                var listOfService = FileHandlingService.ReadFile<MaintainanceService>(FilePath.MaintainanceFile);
+                var listOfService = FileHandlingService.ReadFile<Maintainance>(FilePath.MaintainanceFile);
                 listOfService.Add(service);
                 FileHandlingService.WriteFile(FilePath.MaintainanceFile, listOfService);
             }
         }
 
-        public IEnumerable<MaintainanceService> FetchAllServices()
+        public IEnumerable<Maintainance> FetchAllServices()
         {
             lock (_fileLock)
             {
-                var listOfService = FileHandlingService.ReadFile<MaintainanceService>(FilePath.MaintainanceFile);
+                var listOfService = FileHandlingService.ReadFile<Maintainance>(FilePath.MaintainanceFile);
                 return listOfService;
             }
         }

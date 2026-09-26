@@ -5,8 +5,8 @@ namespace AutoCareApp.ApplicationLayer.Interface
 {
     public interface IMaintainanceRepository
     {
-        void AddService(MaintainanceService service);
+        void AddService(Maintainance service);
 
-        IEnumerable<MaintainanceService> FetchAllServices();
+        IEnumerable<Maintainance> FetchAllServices();
     }
 }

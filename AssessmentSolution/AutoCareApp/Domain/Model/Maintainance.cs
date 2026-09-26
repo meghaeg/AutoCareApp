@@ -3,13 +3,13 @@ using System;
 
 namespace AutoCareApp.Domain.Model
 {
-    public class MaintainanceService
+    public class Maintainance
     {
-        public MaintainanceService()
+        public Maintainance()
         {
         }
 
-        public MaintainanceService(Guid serviceId, Guid vehicleId, ServiceType serviceType, DateTime serviceDate, TimeSpan startTime, TimeSpan endTime)
+        public Maintainance(Guid serviceId, Guid vehicleId, ServiceType serviceType, DateTime serviceDate, TimeSpan startTime, TimeSpan endTime)
         {
             this.ServiceId = serviceId;
             this.VehicleId = vehicleId;

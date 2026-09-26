@@ -77,10 +77,11 @@
     <Compile Include="ApplicationLayer\Interface\IMaintainanceRepository.cs" />
     <Compile Include="ApplicationLayer\Interface\IVehiclerepository.cs" />
     <Compile Include="ApplicationLayer\Service\CurrentSessionManager.cs" />
+    <Compile Include="ApplicationLayer\Service\MaintainanceService.cs" />
     <Compile Include="ApplicationLayer\Service\VehicleService.cs" />
     <Compile Include="Domain\Enums\ServiceStatus.cs" />
     <Compile Include="Domain\Enums\ServiceType.cs" />
-    <Compile Include="Domain\Model\MaintainanceService.cs" />
+    <Compile Include="Domain\Model\Maintainance.cs" />
     <Compile Include="Domain\Model\Vehicle.cs" />
     <Compile Include="InfrastructureLayer\FileHandlingService.cs" />
     <Compile Include="InfrastructureLayer\FilePath.Designer.cs">
