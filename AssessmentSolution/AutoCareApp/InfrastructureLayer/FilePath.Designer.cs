@@ -61,7 +61,16 @@ namespace AutoCareApp.InfrastructureLayer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VehicleRepository.txt.
+        ///   Looks up a localized string similar to MaintainanceRepository.json.
+        /// </summary>
+        internal static string MaintainanceFile {
+            get {
+                return ResourceManager.GetString("MaintainanceFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VehicleRepository.json.
         /// </summary>
         internal static string VehicleFile {
             get {
