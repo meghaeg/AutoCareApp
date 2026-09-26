@@ -8,9 +8,10 @@ namespace AutoCareApp.Domain.Model
         {
         }
 
-        public Vehicle(Guid vehicleId, string vehicleNumber, string model, string manufacturer, int manufacturedYear, double kilometer)
+        public Vehicle(Guid vehicleId, Guid userId, string vehicleNumber, string model, string manufacturer, int manufacturedYear, double kilometer)
         {
             this.VehicleId = vehicleId;
+            this.UserId = userId;
             this.VehicleNumber = vehicleNumber;
             this.Model = model;
             this.Manufacturer = manufacturer;
@@ -19,6 +20,8 @@ namespace AutoCareApp.Domain.Model
         }
 
         public Guid VehicleId { get; set; }
+
+        public Guid UserId { get; set; }
 
         public string VehicleNumber { get; set; }
 
