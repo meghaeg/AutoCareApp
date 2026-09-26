@@ -1,12 +1,17 @@
-﻿using System;
+﻿using AutoCareApp.Domain.Model;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoCareApp.ApplicationLayer.Interface
 {
-    internal class IVehiclerepository
+    public interface IVehiclerepository
     {
+        void AddVehicle(Vehicle vehicle);
+
+        void UpdateVehicle(Guid vehicleId, Vehicle newVehicle);
+
+        void DeleteVehicle(Guid vehicleId);
+
+        IEnumerable<Vehicle> FetchAllVehicles();
     }
 }
